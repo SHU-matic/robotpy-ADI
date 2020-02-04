@@ -19,6 +19,7 @@ sources = [
     "ADIS16470_IMU.cpp"
 ]
 
+# Wrapper section for Library - use 'python setup.py build_dl', to download your library
 [tool.robotpy-build.wrappers."adis16470"]
 name = "adis16470"
 depends = ["wpilibc", "wpilib_core", "wpilibc_interfaces", "wpiHal", "ntcore"]
@@ -48,20 +49,9 @@ install_requires = [
     "wpilib>=2020.2.2.0,<2021.0.0",
 ]
 
-# robotpy-build create-imports adi adis16470._adis16470
-# To build run python setup.py develop
-# install clcache: https://github.com/frerich/clcache
-# pip install clcache
-
-# install ccache
-# define variables
-# export RPYBUILD_PARALLEL=1
-# export CC="ccache gcc"
-# export CXX="ccache g++"
-# export GCC_COLORS=1
+# robotpy-build create-imports adi adis16470._adis16740
+# To build, run 'python setup.py develop'
 
 # http://www.maven.highcurrent.io/maven/com/github/juchong/adis16470-cpp/2020.r1/adis16470-cpp-2020.r1-source.zip
 
-#..\..\..\Pythons\frc2020\Scripts\activate.ps1
-# C:/Users/seth.urbach/Documents/Pythons/frc2020/Scripts/activate.ps1
 
