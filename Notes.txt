@@ -37,9 +37,4 @@ in the robotpy-build repo, it's in tool.py
 just look for the printout and make it print out a posix path instead
 
 
-#..\..\..\Pythons\frc2020\Scripts\activate.ps1
-# C:/Users/seth.urbach/Documents/Pythons/frc2020/Scripts/activate.ps1
-
-$env:PYTHONPATH = 'C:\Users\seth.urbach\Documents\Pythons\frc2020\;C:\Users\seth.urbach\Documents\Pythons\frc2020\Scripts\;C:\Users\seth.urbach\Documents\Pythons\frc2020\lib\site-packages\;C:\Users\seth.urbach\Documents\robotpy-ADI\rpy-ADI\adis16470\'
-
 
