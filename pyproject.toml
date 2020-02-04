@@ -14,23 +14,22 @@ group_id = "com.github.juchong"
 repo_url = "http://maven.highcurrent.io/maven"
 version = "2020.r1"
 use_sources = true
-sources = ["adis16740/src/cpp/ADIS16470_IMU.cpp"]
-sources_classifier: str = "source"
-# sources = ["ADIS16740-RoboRIO-Driver/c++/src/main/cpp/ADIS16740_IMU.cpp"]
-
-
-# This is the name of the library contained in the download
-# libs = ["ADIS16470_IMU"]
+sources_classifier = "source"
+sources = [
+    "ADIS16740_IMU.cpp"
+]
 
 # Wrapper section for Library - use 'python setup.py build_dl', to download your library
 [tool.robotpy-build.wrappers."adis16740"]
 name = "adis16740"
-extra_includes = ["adis16740/src/include/adi"]
-#sources = ["adis16740/src/cpp/ADIS16470_IMU.cpp"]
-source = ["adis16740/src/cpp/ADIS16470_IMU.cpp"]
-depends = ["wpilibc", "wpilib_core", "wpiHal"]
+depends = ["wpilibc", "wpilib_core", "wpilibc_interfaces", "wpiHal", "ntcore"]
+sources = [
+    "adis16470/src/rpy/adis16470.cpp" 
+]
+#"adis16740/src/cpp/ADIS16470_IMU.cpp"      "adis16740/src/rpy/adis16740_imu.cpp"
+pp_defines = ["_USE_MATH_DEFINES 1"]
+
 generate = [
-    # adi
     { ADIS16470_IMU = "adi/ADIS16470_IMU.h" },
 ]
 generation_data = "gen"
@@ -40,7 +39,7 @@ generation_data = "gen"
 #   and output yaml for them in the directory defined by generation_data
 
 [tool.robotpy-build.metadata]
-name = "robotpy-ADI"
+name = "robotpy-adis16470"
 description = "Python Driver Wrapper for ADI ADIS16740 IMU sensor"
 author = "RobotPy Development Team"
 author_email = "robotpy@googlegroups.com"
@@ -51,7 +50,7 @@ install_requires = [
 ]
 
 # robotpy-build create-imports adi adis16470._adis16740
-# To build run python setup.py develop
+# To build, run 'python setup.py develop'
 # install clcache: https://github.com/frerich/clcache
 # pip install clcache
 
