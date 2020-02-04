@@ -6,11 +6,11 @@ __pycache__
 *.dylib
 *.dll
 
-/adis16740/include
-/adis16740/rpy-include
-/adis16740/_init_adis16740.py
-/adis16740/pkgcfg.py
-/adis16740/version.py
+/adis16470/include
+/adis16470/rpy-include
+/adis16470/_init_adis16470.py
+/adis16470/pkgcfg.py
+/adis16470/version.py
 
 /docs/_build
 /docs/_sidebar.rst.inc

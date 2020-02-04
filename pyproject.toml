@@ -1,14 +1,14 @@
 [build-system]
 requires = [
-    "robotpy-build>=2020.0.17,<2021.0.0",
-    "wpilib>=2020.1.2.2,<2021.0.0",
+    "robotpy-build>=2020.0.27,<2021.0.0",
+    "wpilib>=2020.2.2.0,<2021.0.0",
 ]
 
 [tool.robotpy-build]
-base_package = "adis16740"
+base_package = "adis16470"
 
 # Downloads Section - Maven Lib 
-[tool.robotpy-build.wrappers."adis16740".maven_lib_download]
+[tool.robotpy-build.wrappers."adis16470".maven_lib_download]
 artifact_id = "adis16470-cpp"
 group_id = "com.github.juchong"
 repo_url = "http://maven.highcurrent.io/maven"
@@ -16,17 +16,15 @@ version = "2020.r1"
 use_sources = true
 sources_classifier = "source"
 sources = [
-    "ADIS16740_IMU.cpp"
+    "ADIS16470_IMU.cpp"
 ]
 
-# Wrapper section for Library - use 'python setup.py build_dl', to download your library
-[tool.robotpy-build.wrappers."adis16740"]
-name = "adis16740"
+[tool.robotpy-build.wrappers."adis16470"]
+name = "adis16470"
 depends = ["wpilibc", "wpilib_core", "wpilibc_interfaces", "wpiHal", "ntcore"]
 sources = [
-    "adis16470/src/rpy/adis16470.cpp" 
+    "adis16470/src/rpy/adis16470.cpp"
 ]
-#"adis16740/src/cpp/ADIS16470_IMU.cpp"      "adis16740/src/rpy/adis16740_imu.cpp"
 pp_defines = ["_USE_MATH_DEFINES 1"]
 
 generate = [
@@ -34,23 +32,24 @@ generate = [
 ]
 generation_data = "gen"
 
+
 # Run 'python -m robotpy_build scan-headers', to get output to put in generate
 # Run 'python -m robotpy_build create-gen --write', to scan your defined generate items 
 #   and output yaml for them in the directory defined by generation_data
 
 [tool.robotpy-build.metadata]
 name = "robotpy-adis16470"
-description = "Python Driver Wrapper for ADI ADIS16740 IMU sensor"
+description = "Python Driver Wrapper for ADI ADIS16470 IMU sensor"
 author = "RobotPy Development Team"
 author_email = "robotpy@googlegroups.com"
-url = "https://github.com/robotpy/robotpy-adi"
+url = "https://github.com/robotpy/robotpy-adis16470"
 license = "BSD-3-Clause"
 install_requires = [
-    "wpilib>=2020.1.2.2,<2021.0.0",
+    "wpilib>=2020.2.2.0,<2021.0.0",
 ]
 
-# robotpy-build create-imports adi adis16470._adis16740
-# To build, run 'python setup.py develop'
+# robotpy-build create-imports adi adis16470._adis16470
+# To build run python setup.py develop
 # install clcache: https://github.com/frerich/clcache
 # pip install clcache
 

@@ -35,6 +35,3 @@
 
 in the robotpy-build repo, it's in tool.py
 just look for the printout and make it print out a posix path instead
-
-
-

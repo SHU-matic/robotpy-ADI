@@ -1,2 +1,2 @@
 # robotpy-ADI
-Python module for the ADI IMU drivers
+Python module for the ADIS16470 IMU drivers
