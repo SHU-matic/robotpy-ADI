@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import wpilib
-#from wpilib import SendableChooser
+from wpilib import SendableChooser
 from wpilib import SmartDashboard
 from adis16470 import ADIS16470_IMU
 from adis16470 import ADIS16470CalibrationTime
@@ -32,16 +32,16 @@ class MyRobot(wpilib.TimedRobot):
         
         self.m_yawActiveAxis = ADIS16470_IMU.IMUAxis.kZ
 
-        # self.m_autoChooser = wpilib.SendableChooser()
-        # self.m_autoChooser.AddOption(KAUTONAME_CUSTOM, KAUTONAME_CUSTOM)
+        self.m_autoChooser = wpilib.SendableChooser()
+        self.m_autoChooser.AddOption(KAUTONAME_CUSTOM, KAUTONAME_CUSTOM)
 
-        # self.m_yawChooser = wpilib.SendableChooser()
-        # self.m_yawChooser.SetDefaultOption(KYAW_DEFAULT, KYAW_DEFAULT)
-        # self.m_yawChooser.AddOption(kYawXAxis, kYawXAxis)
-        # self.m_yawChooser.AddOption(kYawYAxis, kYawYAxis)
+        self.m_yawChooser = wpilib.SendableChooser()
+        self.m_yawChooser.SetDefaultOption(KYAW_DEFAULT, KYAW_DEFAULT)
+        self.m_yawChooser.AddOption(kYawXAxis, kYawXAxis)
+        self.m_yawChooser.AddOption(kYawYAxis, kYawYAxis)
         
-        # wpilib.SmartDashboard.putData("Auto Modes", m_autoChooser)
-        # wpilib.SmartDashboard.putData("IMUYawAxis", m_yawChooser)
+        wpilib.SmartDashboard.putData("Auto Modes", m_autoChooser)
+        wpilib.SmartDashboard.putData("IMUYawAxis", m_yawChooser)
 
         wpilib.SmartDashboard.putBoolean("RunCal", False)
         wpilib.SmartDashboard.putBoolean("ConfigCal", False)
@@ -66,7 +66,7 @@ class MyRobot(wpilib.TimedRobot):
         wpilib.SmartDashboard.getBoolean("RunCal", False)
         wpilib.SmartDashboard.getBoolean("RunCal", False)
         wpilib.SmartDashboard.getBoolean("RunCal", False)
-        #self.m_yawSelected = self.m_yawChooser.GetSelected()
+        self.m_yawSelected = self.m_yawChooser.GetSelected()
         self.m_yawSelected = KYAW_DEFAULT  
 
         # Set IMU settings
@@ -136,38 +136,47 @@ class MyRobot(wpilib.TimedRobot):
 
         SmartDashboard.putString("Auto Selected", self.m_autoSelected)
 
+        wpilib.SmartDashboard.putNumber("YawAngle", self.m_imu.getAngle())
 
-    # def disabled(self):
 
+
+    def disabledInit(self):
+        print("Entered Disabled Init")
+
+    def disabled(self):
+        print("Entered Disabled method")
     #     sendableImuData = wpilib.SendableBuilder()
     #     self.m_imu.InitSendable(sendableImuData)
 
     #     self.logger.info("Entered disabled mode")
 
-    #     self.timer.reset()
-    #     self.timer.start()
+        self.timer.reset()
+        self.timer.start()
 
-    #     while self.isDisabled():
+        while self.isDisabled():
 
-    #         if self.timer.hasPeriodPassed(0.5):
-    #             SmartDashboard.putNumber("YawAngle", self.m_imu.GetAngle())
-    #             SmartDashboard.putNumber("XCompAngle", self.m_imu.GetXComplementaryAngle())
-    #             SmartDashboard.putNumber("XFilteredAccelAngle", self.m_imu.GetXFilteredAccelAngle())                
-    #             SmartDashboard.putNumber("YCompAngle", self.m_imu.GetYComplementaryAngle())
-    #             SmartDashboard.putNumber("YFilteredAccelAngle", self.m_imu.GetYFilteredAccelAngle())
+            if self.timer.hasPeriodPassed(0.5):
+                print("Disabled status loop.")
+                SmartDashboard.putNumber("YawAngle", self.m_imu.GetAngle())
+                SmartDashboard.putNumber("XCompAngle", self.m_imu.GetXComplementaryAngle())
+                SmartDashboard.putNumber("XFilteredAccelAngle", self.m_imu.GetXFilteredAccelAngle())                
+                SmartDashboard.putNumber("YCompAngle", self.m_imu.GetYComplementaryAngle())
+                SmartDashboard.putNumber("YFilteredAccelAngle", self.m_imu.GetYFilteredAccelAngle())
 
-    #             SmartDashboard.putNumber("AccelInstantX", self.m_imu.GetAccelInstantX()))
-    #             SmartDashboard.putNumber("AccelInstantY", self.m_imu.GetAccelInstantY())
-    #             SmartDashboard.putNumber("AccelInstantZ", self.m_imu.GetAccelInstantZ())
+                SmartDashboard.putNumber("AccelInstantX", self.m_imu.GetAccelInstantX())
+                SmartDashboard.putNumber("AccelInstantY", self.m_imu.GetAccelInstantY())
+                SmartDashboard.putNumber("AccelInstantZ", self.m_imu.GetAccelInstantZ())
 
-    #             SmartDashboard.putNumber("GyroInstantX", self.m_imu.GetGyroInstantX())
-    #             SmartDashboard.putNumber("GyroInstantY", self.m_imu.GetGyroInstantY())
-    #             SmartDashboard.putNumber("GyroInstantZ", self.m_imu.GetGyroInstantZ())
-    #             SmartDashboard.putNumber("GyroRate", self.m_imu.GetRate())
+                SmartDashboard.putNumber("GyroInstantX", self.m_imu.GetGyroInstantX())
+                SmartDashboard.putNumber("GyroInstantY", self.m_imu.GetGyroInstantY())
+                SmartDashboard.putNumber("GyroInstantZ", self.m_imu.GetGyroInstantZ())
+                SmartDashboard.putNumber("GyroRate", self.m_imu.GetRate())
                 
-    #             SmartDashboard.putNumber("GyroRate", self.m_imu.GetRate())
+                SmartDashboard.putNumber("GyroRate", self.m_imu.GetRate())
+                self.timer.reset()
 
-    #         wpilib.Timer.delay(0.010)
+           ## Do not use in RobotPy - wpilib.Timer.delay(0.10)
+
 
 
 if __name__ == "__main__":
